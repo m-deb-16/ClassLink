@@ -5,6 +5,38 @@ const upload = require("../middleware/upload");
 
 const router = express.Router();
 
+// Like a resource
+router.post("/:id/like", async (req, res) => {
+  const userId = req.body.userId;
+  const resource = await Resource.findById(req.params.id);
+
+  if (!resource.likes.includes(userId)) {
+    resource.likes.push(userId);
+    resource.dislikes = resource.dislikes.filter(id => id.toString() !== userId);
+  } else {
+    resource.likes = resource.likes.filter(id => id.toString() !== userId); // toggle
+  }
+
+  await resource.save();
+  res.json(resource);
+});
+
+// Dislike a resource
+router.post("/:id/dislike", async (req, res) => {
+  const userId = req.body.userId;
+  const resource = await Resource.findById(req.params.id);
+
+  if (!resource.dislikes.includes(userId)) {
+    resource.dislikes.push(userId);
+    resource.likes = resource.likes.filter(id => id.toString() !== userId);
+  } else {
+    resource.dislikes = resource.dislikes.filter(id => id.toString() !== userId); // toggle
+  }
+
+  await resource.save();
+  res.json(resource);
+});
+
 // Upload a new resource
 router.post("/upload", upload.single("file"), async (req, res) => {
   try {

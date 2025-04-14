@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Container, Row, Col, Button, Form, Card } from "react-bootstrap"; // Updated imports
 import FooterComponent from "../components/FooterComponent";
+import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
+
 function Resources() {
   const [resources, setResources] = useState([]);
   const [filteredResources, setFilteredResources] = useState([]);
@@ -16,6 +18,11 @@ function Resources() {
   const [filterType, setFilterType] = useState("All");
   const [tagSearch, setTagSearch] = useState("");
 
+  // Extract user ID from token
+  const token = localStorage.getItem("token");
+  const user = token ? JSON.parse(atob(token.split('.')[1])) : null;
+  const userId = user?.id || user?._id;  // Adjust based on your token
+
   const fileInputRef = useRef(null);
 
   const fetchResources = async () => {
@@ -27,6 +34,28 @@ function Resources() {
     });
     setResources(res.data);
     setFilteredResources(res.data);
+  };
+
+  const handleLike = async (id) => {
+    if (!userId) {
+      alert("Please login to like a resource.");
+      return;
+    }
+    await axios.post(`http://localhost:5000/api/resources/${id}/like`, {
+      userId,
+    });
+    fetchResources(); // refresh
+  };
+  
+  const handleDislike = async (id) => {
+    if (!userId) {
+      alert("Please login to dislike a resource.");
+      return;
+    }
+    await axios.post(`http://localhost:5000/api/resources/${id}/dislike`, {
+      userId,
+    });
+    fetchResources(); // refresh
   };
 
   const handleUpload = async (e) => {
@@ -202,15 +231,15 @@ function Resources() {
                   <Card.Text>{res.description}</Card.Text>
                   <p>📎 Tags: {res.tags.join(", ")}</p>
 
-                  {/* allows image preview */}
-                  {/* {res.type.toLowerCase() === "image" ? (
-                    <Card.Img
-                      variant="top"
-                      src={`http://localhost:5000/api/resources/file/${res._id}`}
-                      alt={res.title}
-                      style={{ maxHeight: "50px", objectFit: "scale-down" }}
-                    />
-                  ) : ( */}
+                  {/* 👍👎 Like/Dislike Section */}
+                  <p>👍 {res.likes?.length || 0} | 👎 {res.dislikes?.length || 0}</p>
+                  <button className="likeBtn"  onClick={() => handleLike(res._id)}>
+                    <FaThumbsUp />
+                  </button>
+                  <button className="likeBtn" onClick={() => handleDislike(res._id)}>
+                    <FaThumbsDown />
+                  </button>
+
                   <Button
                     variant="link"
                     href={`http://localhost:5000/api/resources/file/${res._id}`}
@@ -218,10 +247,11 @@ function Resources() {
                   >
                     View File
                   </Button>
-                  {/* )} */}
                 </Card.Body>
               </Card>
+              
             </Col>
+            
           ))}
         </Row>
       </Container>

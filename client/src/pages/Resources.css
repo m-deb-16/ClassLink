@@ -39,6 +39,10 @@ button {
   cursor: pointer;
 }
 
+.likeBtn {
+  margin: 5px;
+}
+
 button:hover {
   background-color: #0056b3;
   border-color: #004085;

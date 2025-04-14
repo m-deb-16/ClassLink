@@ -15,6 +15,8 @@ const resourceSchema = new mongoose.Schema({
   tags: [String],
   groupId: { type: mongoose.Schema.Types.ObjectId, ref: "Group" },
   createdAt: { type: Date, default: Date.now },
+  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  dislikes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
 });
 
 module.exports = mongoose.model("Resource", resourceSchema);
