@@ -1,7 +1,16 @@
 import { useEffect, useState } from "react";
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-
+import {
+  FaSignInAlt,
+  FaUserPlus,
+  FaHome,
+  FaAddressBook,
+  FaConciergeBell,
+  FaSignOutAlt,
+  FaComments,
+} from "react-icons/fa";
+import "./NavbarComponent.css";
 function NavbarComponent() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
@@ -15,22 +24,34 @@ function NavbarComponent() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setIsLoggedIn(false);
-    navigate("/"); // Redirects to home (which is the login page)
+    navigate("/"); // Redirects to home (login page)
   };
 
   const handleLoginRedirect = () => {
     if (isLoggedIn) {
-      navigate("/dashboard"); // Redirect to dashboard if already logged in
+      navigate("/dashboard"); // Redirect to dashboard if logged in
     } else {
-      navigate("/"); // Otherwise, navigate to the login (which is also the home page)
+      navigate("/"); // Navigate to login page if not logged in
     }
   };
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar
+      bg="dark"
+      variant="dark"
+      expand="lg"
+      sticky="top"
+      // className="shadow-sm"
+      className="navbar-custom"
+    >
       <Container>
         <Navbar.Brand as={Link} to={isLoggedIn ? "/dashboard" : "/"}>
-          MyApp
+          <img
+            src="https://i.postimg.cc/NfM78ptP/Pngtree-hand-drawn-online-education-online-4986515.png" // Replace with your image URL
+            alt="MyApp Logo"
+            className="navbar-logo"
+            style={{ height: "60px", width: "auto" }} // Adjust logo size
+          />
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -38,43 +59,85 @@ function NavbarComponent() {
           <Nav className="ms-auto">
             {isLoggedIn ? (
               <>
-                <Nav.Link as={Link} to="/dashboard">
-                  Dashboard
+                <Nav.Link
+                  as={Link}
+                  to="/dashboard"
+                  className="text-light hover-text"
+                >
+                  <FaHome className="me-1" /> Dashboard
                 </Nav.Link>
-                <Nav.Link as={Link} to="/resources">
-                  Resources
+                <Nav.Link
+                  as={Link}
+                  to="/resources"
+                  className="text-light hover-text"
+                >
+                  <FaConciergeBell className="me-1" /> Resources
+                </Nav.Link>
+                <Nav.Link
+                  as={Link}
+                  to="/events"
+                  className="text-light hover-text"
+                >
+                  <FaConciergeBell className="me-1" /> Events
+                </Nav.Link>
+                <Nav.Link
+                  as={Link}
+                  to="/contact"
+                  className="text-light hover-text"
+                >
+                  <FaAddressBook className="me-1" /> Contact Us
+                </Nav.Link>
+
+                <Nav.Link
+                  as={Link}
+                  to="/discussion"
+                  className="text-light hover-text"
+                >
+                  <FaComments className="me-1" /> Forum
                 </Nav.Link>
                 <Button
                   variant="outline-light"
                   onClick={handleLogout}
-                  className="ms-2"
+                  className="ms-2 logout-btn"
                 >
-                  Logout
+                  <FaSignOutAlt className="me-1" /> Logout
                 </Button>
               </>
             ) : (
               <>
-                {/* Login Button now works for home page and redirects to login */}
                 <Button
                   variant="outline-light"
                   onClick={handleLoginRedirect}
-                  className="me-2"
+                  className="me-2 hover-text"
                 >
+                  <FaSignInAlt className="me-1" />{" "}
                   {isLoggedIn ? "Go to Dashboard" : "Login"}
                 </Button>
-                <Button variant="primary" as={Link} to="/register">
-                  Register
+                <Button
+                  variant="primary"
+                  as={Link}
+                  to="/register"
+                  className="hover-text"
+                >
+                  <FaUserPlus className="me-1" /> Register
                 </Button>
+                <Nav.Link
+                  as={Link}
+                  to="/contact"
+                  className="text-light hover-text"
+                >
+                  <FaAddressBook className="me-1" /> Contact Us
+                </Nav.Link>
+
+                <Nav.Link
+                  as={Link}
+                  to="/discussion"
+                  className="text-light hover-text"
+                >
+                  <FaComments className="me-1" /> Forum
+                </Nav.Link>
               </>
             )}
-
-            {/* Always visible Contact Us link */}
-            <Nav.Link as={Link} to="/contact">
-              Contact Us
-            </Nav.Link>
-            <Nav.Link as={Link} to="/discussion">
-              Forum
-            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

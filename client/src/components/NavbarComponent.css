@@ -1,0 +1,19 @@
+/* Hover effect for navbar links and buttons */
+.hover-text:hover {
+  color: #41f6ff !important; /* Light color on hover */
+  /* text-decoration: underline; */
+}
+
+.logout-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Light background on hover */
+}
+
+/* Gradient + Blurred Background */
+.navbar-custom {
+  background: linear-gradient(
+    to right,
+    rgba(106, 17, 203, 0.8),
+    rgba(37, 117, 252, 0.8)
+  );
+  backdrop-filter: blur(10px);
+}

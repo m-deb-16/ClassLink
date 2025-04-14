@@ -4,6 +4,7 @@ const cors = require("cors");
 const resourceRoutes = require("./routes/resourceRoutes");
 const authRoutes = require("./routes/authRoutes");
 const discussionRoutes = require("./routes/discussionRoutes");
+const eventRoutes = require("./routes/eventRoutes");
 require("dotenv").config();
 
 const app = express();
@@ -17,6 +18,7 @@ app.use("/api/auth", authRoutes);
 
 app.use("/api/discussion", discussionRoutes);
 
+app.use("/api/events", eventRoutes);
 app.get("/", (req, res) => {
   res.send("✅ Learning Resource Management Server is running!");
 });

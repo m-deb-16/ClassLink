@@ -9,7 +9,7 @@ function Dashboard() {
         className="hero-section text-white py-5 d-flex justify-content-center align-items-center"
         style={{
           height: "100vh",
-          background: "linear-gradient(to right, #6a11cb, #2575fc)", // Gradient applied here
+          background: "linear-gradient(to right, #6a11cb, #2575fc)", // Gradient background
         }}
       >
         <Container>
