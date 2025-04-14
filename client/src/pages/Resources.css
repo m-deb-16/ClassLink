@@ -1,0 +1,71 @@
+/* Style for Resource Items */
+.resource-item {
+  background-color: #f8f9fa;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.resource-item h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.resource-item p {
+  color: #666;
+}
+
+.resource-item img {
+  border-radius: 10px;
+}
+
+hr {
+  border-color: #dee2e6;
+}
+
+/* Form Styling */
+.form-group {
+  margin-bottom: 20px;
+}
+
+button {
+  background-color: #0069d9;
+  border-color: #0062cc;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+input[type="file"] {
+  margin-top: 10px;
+}
+
+select,
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+input[type="text"],
+textarea {
+  margin-top: 5px;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #0056b3;
+  outline: none;
+}
