@@ -8,6 +8,11 @@ const resourceSchema = new mongoose.Schema({
     enum: ["video", "pdf", "link", "doc", "image"],
     default: "link",
   },
+  // type: {
+  //   type: String,
+  //   enum: ["video", "pdf", "link", "doc", "image", "text", "ppt"],
+  //   default: "link",
+  // },
   fileName: String,
   fileData: Buffer,
   fileType: String,

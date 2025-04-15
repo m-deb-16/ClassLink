@@ -20,8 +20,8 @@ function Resources() {
 
   // Extract user ID from token
   const token = localStorage.getItem("token");
-  const user = token ? JSON.parse(atob(token.split('.')[1])) : null;
-  const userId = user?.id || user?._id;  // Adjust based on your token
+  const user = token ? JSON.parse(atob(token.split(".")[1])) : null;
+  const userId = user?.id || user?._id; // Adjust based on your token
 
   const fileInputRef = useRef(null);
 
@@ -46,7 +46,7 @@ function Resources() {
     });
     fetchResources(); // refresh
   };
-  
+
   const handleDislike = async (id) => {
     if (!userId) {
       alert("Please login to dislike a resource.");
@@ -147,9 +147,9 @@ function Resources() {
                 >
                   <option value="PDF">PDF</option>
                   <option value="Video">Video</option>
-                  <option value="Text">Text</option>
+                  {/* <option value="Text">Text</option>*/}
                   <option value="Image">Image</option>
-                  <option value="Link">Link</option>
+                  {/*<option value="Link">Link</option>*/}
                 </Form.Control>
               </Form.Group>
               <Form.Group controlId="description" className="my-3">
@@ -232,11 +232,19 @@ function Resources() {
                   <p>📎 Tags: {res.tags.join(", ")}</p>
 
                   {/* 👍👎 Like/Dislike Section */}
-                  <p>👍 {res.likes?.length || 0} | 👎 {res.dislikes?.length || 0}</p>
-                  <button className="likeBtn"  onClick={() => handleLike(res._id)}>
+                  <p>
+                    👍 {res.likes?.length || 0} | 👎 {res.dislikes?.length || 0}
+                  </p>
+                  <button
+                    className="likeBtn"
+                    onClick={() => handleLike(res._id)}
+                  >
                     <FaThumbsUp />
                   </button>
-                  <button className="likeBtn" onClick={() => handleDislike(res._id)}>
+                  <button
+                    className="likeBtn"
+                    onClick={() => handleDislike(res._id)}
+                  >
                     <FaThumbsDown />
                   </button>
 
@@ -249,9 +257,7 @@ function Resources() {
                   </Button>
                 </Card.Body>
               </Card>
-              
             </Col>
-            
           ))}
         </Row>
       </Container>
