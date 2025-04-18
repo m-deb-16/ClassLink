@@ -24,3 +24,8 @@ Thumbs.db
 # Ignore test cache
 **/.jest/
 **/.cache/
+
+# Ignore package-lock files
+package-lock.json
+**/package-lock.json
+
