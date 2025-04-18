@@ -1,12 +1,15 @@
 # Ignore node_modules in all subdirectories
-**/node_modules/
+node_modules/
+client/node_modules/
+server/node_modules/
+
 
 # Ignore build outputs
 **/dist/
 **/build/
 
 # Ignore environment files
-**/.env
+server/.env
 
 # Ignore logs
 *.log
